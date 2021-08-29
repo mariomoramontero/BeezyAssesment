@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BeezyAssesment.ViewModels"  
+             xmlns:model="clr-namespace:BeezyAssesment.Models"  
+             x:Class="BeezyAssesment.Views.ComicDetailPage"
+             Shell.PresentationMode="Animated"
+            
+             Title="{Binding ComicData.title}">
+
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="15,20,15,20" x:DataType="local:ComicDetailViewModel"  >
+            <Image Source="{Binding ComicData.thumbnail.FullPath}"  
+                                  Aspect="AspectFit" HeightRequest="300"/>
+
+            <Label Text="{Binding ComicData.title}" FontSize="Large" FontAttributes="Bold"/>
+            <Label Text="{Binding ComicData.description}" FontSize="Medium" FontAttributes="Italic"/>
+            <StackLayout Orientation="Horizontal" Spacing="40">
+                <Label Text="Price:" HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" FontSize="Large" TextColor="DodgerBlue" FontAttributes="Bold"/>
+                <Label Text="{Binding Price}" FontAttributes="Bold" FontSize="Large" HorizontalOptions="End" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="Red"/>
+                <Button Text="Add to cart" Clicked="Button_Clicked"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

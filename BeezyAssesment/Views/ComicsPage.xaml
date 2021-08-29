@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BeezyAssesment.Views.ItemsPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:BeezyAssesment.ViewModels"  
+             xmlns:model="clr-namespace:BeezyAssesment.Models"  
+             x:Name="BrowseItemsPage">
+  
+    <StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            <Frame BorderColor="White" CornerRadius="30" HorizontalOptions="FillAndExpand" BackgroundColor="AliceBlue">
+                <Entry x:Name="EntryCharacterFilter" Text="{Binding FilterTitleStartsWith}" Placeholder="Filter by tilte starts with..." FontSize="Medium" ReturnCommand="{Binding LoadItemsCommand}"  />
+            </Frame>
+
+        </StackLayout>
+
+        <RefreshView x:DataType="local:ComicsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView x:Name="ItemsListView"                      
+                ItemsSource="{Binding Comics}"
+                SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" x:DataType="model:Comic">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    NumberOfTapsRequired="1"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:ComicsViewModel}}, Path=ItemTapped}"		
+                                    CommandParameter="{Binding .}">
+                                </TapGestureRecognizer> 
+                            </Grid.GestureRecognizers>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="150" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Image Source="{Binding thumbnail.FullPath}"  Grid.Row="0"
+                                  Aspect="AspectFit"                                   
+                                 />
+                            <StackLayout Grid.Row="1">
+                                <Label Text="{Binding title}"  Grid.Column="1"
+                                       VerticalOptions="Center"                                      
+                                       FontAttributes="Bold"                                                           
+                                       FontSize="16" />
+                                <Label Text="{Binding description}" Grid.Row="1" Grid.Column="1"
+                                   MaxLines="2" TextType="Html"
+                                   LineBreakMode="TailTruncation"                                   
+                                   VerticalOptions="Start"
+                                   FontAttributes="Italic"
+                                   FontSize="13" />
+
+
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
+</ContentPage>

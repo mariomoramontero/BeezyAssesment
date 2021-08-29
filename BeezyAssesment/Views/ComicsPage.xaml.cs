@@ -14,13 +14,13 @@ namespace BeezyAssesment.Views
 {
     public partial class ItemsPage : ContentPage
     {
-        ItemsViewModel _viewModel;
+        ComicsViewModel _viewModel;
 
         public ItemsPage()
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ItemsViewModel();
+            BindingContext = _viewModel = new ComicsViewModel();
         }
 
         protected override void OnAppearing()
