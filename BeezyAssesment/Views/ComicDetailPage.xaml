@@ -14,7 +14,7 @@
                                   Aspect="AspectFit" HeightRequest="300"/>
 
             <Label Text="{Binding ComicData.title}" FontSize="Large" FontAttributes="Bold"/>
-            <Label Text="{Binding ComicData.description}" FontSize="Medium" FontAttributes="Italic"/>
+            <Label Text="{Binding ComicData.description}" FontSize="Medium" FontAttributes="Italic" TextType="Html"/>
             <StackLayout Orientation="Horizontal" Spacing="40">
                 <Label Text="Price:" HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" FontSize="Large" TextColor="DodgerBlue" FontAttributes="Bold"/>
                 <Label Text="{Binding Price}" FontAttributes="Bold" FontSize="Large" HorizontalOptions="End" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="Red"/>
